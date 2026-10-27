@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lemonpepperseasoning.github.io/kabosulab-web/sitemap-index.xml

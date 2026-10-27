@@ -1,0 +1,24 @@
+---
+import { studio, href, type App } from '../apps';
+interface Props { app?: App }
+const { app } = Astro.props;
+---
+<header class="container head">
+  {app
+    ? <a class="brand" href={href(`${app.slug}/`)}><img src={href(`${app.slug}/app-icon.png`)} alt="" width="32" height="32" />{app.name}</a>
+    : <a class="brand" href={href('')}><img src={href('favicon.svg')} alt="" width="28" height="28" />{studio.name}</a>}
+  {app && (
+    <nav aria-label={app.name}>
+      <a href={href(`${app.slug}/support/`)}>Support</a>
+      <a href={href(`${app.slug}/privacy/`)}>Privacy</a>
+    </nav>
+  )}
+</header>
+<style>
+  .head { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 72px; }
+  .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); font-weight: 650; font-size: 1.0625rem; text-decoration: none; }
+  .brand img { border-radius: 22%; }
+  nav { display: flex; gap: 4px; }
+  nav a { color: var(--muted); text-decoration: none; font-size: var(--fs-small); padding: 10px 12px; min-height: 44px; display: inline-flex; align-items: center; }
+  nav a:hover { color: var(--ink); }
+</style>

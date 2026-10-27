@@ -1,0 +1,22 @@
+---
+import { studio, href, type App } from '../apps';
+interface Props { app?: App }
+const { app } = Astro.props;
+---
+<footer class="container foot">
+  <nav aria-label="Footer">
+    {app && <a href={href(`${app.slug}/`)}>{app.name}</a>}
+    {app && <a href={href(`${app.slug}/support/`)}>Support</a>}
+    {app && <a href={href(`${app.slug}/privacy/`)}>Privacy</a>}
+    <a href={href('')}>{app ? `More from ${studio.name}` : studio.name}</a>
+  </nav>
+  <p>© 2026 {studio.name}</p>
+  <p>Apple, the Apple logo, iPhone and iPad are trademarks of Apple Inc., registered in the U.S. and other countries. App Store is a service mark of Apple Inc.</p>
+</footer>
+<style>
+  .foot { border-top: 1px solid var(--line); padding-top: 24px; padding-bottom: 48px; margin-top: var(--section-y); font-size: .8125rem; color: var(--muted); }
+  nav { display: flex; flex-wrap: wrap; gap: 0 20px; margin-bottom: 8px; }
+  nav a { color: var(--muted); min-height: 44px; display: inline-flex; align-items: center; }
+  nav a:hover { color: var(--ink); }
+  p { margin-top: 8px; max-width: 46em; }
+</style>

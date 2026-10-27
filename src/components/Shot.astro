@@ -1,0 +1,19 @@
+---
+// An app screenshot with rounded corners, as AVIF/WebP at 1x and 2x.
+import { getImage } from 'astro:assets';
+interface Props { src: ImageMetadata; alt: string; width?: number; eager?: boolean }
+const { src, alt, width = 280, eager = false } = Astro.props;
+const set = async (format: 'avif' | 'webp') =>
+  (await Promise.all([1, 2].map((x) => getImage({ src, width: Math.min(width * x, src.width), format })))).map((r, i) => `${r.src} ${i + 1}x`).join(', ');
+const [avif, webp] = await Promise.all([set('avif'), set('webp')]);
+const fallback = await getImage({ src, width: Math.min(width * 2, src.width), format: 'webp' });
+const height = Math.round((width * src.height) / src.width);
+---
+<picture class="shot">
+  <source type="image/avif" srcset={avif} />
+  <source type="image/webp" srcset={webp} />
+  <img src={fallback.src} alt={alt} width={width} height={height} loading={eager ? 'eager' : 'lazy'} decoding="async" />
+</picture>
+<style>
+  .shot img { border-radius: 11% / 5.1%; border: 1px solid var(--line); box-shadow: 0 24px 60px rgb(0 0 0 / .55); }
+</style>

@@ -1,0 +1,15 @@
+---
+// Apple's official badge, unaltered (public/badges/, from Apple's marketing resources), linked to the
+// App Store. Before an app is live, a plain "coming soon" line instead: Apple has no coming-soon badge.
+import { appStoreURL, href, type App } from '../apps';
+interface Props { app: App }
+const { app } = Astro.props;
+---
+{app.appStoreId
+  ? <a class="badge" href={appStoreURL(app)}><img src={href('badges/app-store-en.svg')} alt="Download on the App Store" width="160" height="53" /></a>
+  : <p class="soon">Coming soon to the App Store</p>}
+<style>
+  .badge { display: inline-block; }
+  .badge img { height: 53px; width: auto; }
+  .soon { display: inline-block; padding: 10px 16px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+</style>
