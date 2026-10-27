@@ -1,0 +1,9 @@
+---
+// Lucide icons (ISC), inlined at build time. SF Symbols aren't licensed for the web.
+const icons = import.meta.glob('../../../../node_modules/lucide-static/icons/*.svg', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
+interface Props { name: string; size?: number }
+const { name, size = 22 } = Astro.props;
+const raw = icons[`../../../../node_modules/lucide-static/icons/${name}.svg`] ?? '';
+const svg = raw.replace(/width="24"/, `width="${size}"`).replace(/height="24"/, `height="${size}"`).replace(/stroke-width="2"/, 'stroke-width="1.75"');
+---
+<span class="icon" aria-hidden="true" set:html={svg} />

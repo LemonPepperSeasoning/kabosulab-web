@@ -1,0 +1,42 @@
+---
+import Base from '../../layouts/Base.astro';
+import { site } from '../../config';
+import { t, type Lang } from '../../i18n/site';
+import { help } from '../../i18n/help';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t[lang];
+const items = help[lang];
+const mail = `mailto:${site.email}?subject=${encodeURIComponent('Hasha support')}`;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map((i) => ({ '@type': 'Question', name: i.q, acceptedAnswer: { '@type': 'Answer', text: i.a.join(' ') } })),
+};
+---
+<Base lang={lang} page="support/" title={`${s.supportTitle} · Hasha`} description={s.supportDescription} jsonLd={jsonLd}>
+  <article class="container reading">
+    <h1>{s.supportTitle}</h1>
+    <div class="paper contact">
+      <h2>{s.contactTitle}</h2>
+      <p class="small">{s.contactBody} <a href={mail}>{site.email}</a>. {s.contactAfter}</p>
+    </div>
+    {items.map((item) => (
+      <details>
+        <summary>{item.q}</summary>
+        {item.a.map((p) => <p class="small">{p}</p>)}
+        {item.code && <pre><code>{item.code}</code></pre>}
+      </details>
+    ))}
+  </article>
+</Base>
+
+<style>
+  .reading { max-width: calc(42em + 2 * var(--gutter)); padding-top: var(--section-y); }
+  .contact { padding: 24px; margin: 32px 0 40px; }
+  .contact h2 { font-size: 1.1875rem; margin-bottom: 8px; }
+  details { border-bottom: 1px solid var(--line); padding: 4px 0; }
+  summary { cursor: pointer; font-weight: 600; padding: 14px 0; min-height: 44px; list-style-position: inside; }
+  details p { margin: 0 0 14px; font-size: var(--fs-body); }
+  details pre { margin: 0 0 18px; }
+</style>

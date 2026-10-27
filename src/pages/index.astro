@@ -1,15 +1,15 @@
 ---
-import Base from '../layouts/Base.astro';
+import Studio from '../layouts/Studio.astro';
 import { apps, studio, href } from '../apps';
 ---
-<Base title={studio.name} description={`${studio.name} makes small, private iPhone apps.`}>
+<Studio title={studio.name} description={`${studio.name} makes small, private iPhone apps.`}>
   <section class="container section">
     <h1>{studio.name}</h1>
     <p class="lead">Small iPhone apps that do one thing well. No accounts, no ads, no tracking.</p>
     <ul class="apps">
       {apps.map((a) => (
         <li>
-          <a class="card app" href={a.externalURL ?? href(`${a.slug}/`)}>
+          <a class="card app" href={href(`${a.slug}/`)}>
             <img src={href(`${a.slug}/app-icon.png`)} alt="" width="64" height="64" />
             <span>
               <h2>{a.name}</h2>
@@ -19,9 +19,8 @@ import { apps, studio, href } from '../apps';
         </li>
       ))}
     </ul>
-    <p class="muted contact">Contact: <a href={`mailto:${studio.email}`}>{studio.email}</a></p>
   </section>
-</Base>
+</Studio>
 <style>
   .lead { margin-top: 16px; }
   .apps { list-style: none; padding: 0; margin: 48px 0 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
@@ -29,5 +28,5 @@ import { apps, studio, href } from '../apps';
   .app:hover { border-color: var(--accent); }
   .app img { border-radius: 22%; flex: none; }
   .app h2 { font-size: 1.25rem; margin-bottom: 4px; }
-  .contact { margin-top: 48px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-l); padding: 24px; }
 </style>

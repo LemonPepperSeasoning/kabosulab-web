@@ -1,0 +1,27 @@
+---
+// An app screenshot in a screen-shaped frame; dark-mode visitors see the dark screenshot.
+import { getImage } from 'astro:assets';
+import type { Lang } from '../i18n/site';
+const shots = import.meta.glob<{ default: ImageMetadata }>('../assets/shots/*.png', { eager: true });
+interface Props { lang: Lang; shot: string; alt: string; width?: number; eager?: boolean }
+const { lang, shot, alt, width = 300, eager = false } = Astro.props;
+const light = shots[`../assets/shots/${lang}-${shot}-light.png`].default;
+const dark = shots[`../assets/shots/${lang}-${shot}-dark.png`].default;
+const w = [width, width * 2];
+const make = async (src: ImageMetadata, format: 'avif' | 'webp') =>
+  (await Promise.all(w.map((x) => getImage({ src, width: Math.min(x, src.width), format })))).map((r, i) => `${r.src} ${i + 1}x`).join(', ');
+const [darkAvif, darkWebp, lightAvif, lightWebp] = await Promise.all([make(dark, 'avif'), make(dark, 'webp'), make(light, 'avif'), make(light, 'webp')]);
+const fallback = await getImage({ src: light, width: Math.min(width * 2, light.width), format: 'webp' });
+const height = Math.round((width * light.height) / light.width);
+---
+<picture class="phone">
+  <source media="(prefers-color-scheme: dark)" type="image/avif" srcset={darkAvif} />
+  <source media="(prefers-color-scheme: dark)" type="image/webp" srcset={darkWebp} />
+  <source type="image/avif" srcset={lightAvif} />
+  <source type="image/webp" srcset={lightWebp} />
+  <img src={fallback.src} alt={alt} width={width} height={height} loading={eager ? 'eager' : 'lazy'} decoding="async" />
+</picture>
+<style>
+  .phone { display: block; }
+  .phone img { border-radius: 12% / 5.6%; border: 1px solid var(--stack-edge); box-shadow: var(--shadow-stack); background: var(--card); }
+</style>

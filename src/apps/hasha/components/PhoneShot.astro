@@ -1,0 +1,23 @@
+---
+// An app screenshot in a screen-shaped frame, as AVIF/WebP at 1x and 2x. Hasha is dark only, so one image per screen.
+import { getImage } from 'astro:assets';
+import type { Lang } from '../i18n/site';
+const shots = import.meta.glob<{ default: ImageMetadata }>('../assets/shots/*.png', { eager: true });
+interface Props { lang: Lang; shot: string; alt: string; width?: number; eager?: boolean }
+const { lang, shot, alt, width = 260, eager = false } = Astro.props;
+const src = shots[`../assets/shots/${lang}-${shot}.png`].default;
+const make = async (format: 'avif' | 'webp') =>
+  (await Promise.all([1, 2].map((x) => getImage({ src, width: Math.min(width * x, src.width), format })))).map((r, i) => `${r.src} ${i + 1}x`).join(', ');
+const [avif, webp] = await Promise.all([make('avif'), make('webp')]);
+const fallback = await getImage({ src, width: Math.min(width * 2, src.width), format: 'webp' });
+const height = Math.round((width * src.height) / src.width);
+---
+<picture class="phone">
+  <source type="image/avif" srcset={avif} />
+  <source type="image/webp" srcset={webp} />
+  <img src={fallback.src} alt={alt} width={width} height={height} loading={eager ? 'eager' : 'lazy'} decoding="async" />
+</picture>
+<style>
+  .phone { display: block; }
+  .phone img { border-radius: 11% / 5.1%; border: 1px solid var(--line); box-shadow: 0 24px 60px rgb(0 0 0 / .55); }
+</style>

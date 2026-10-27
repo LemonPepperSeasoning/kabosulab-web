@@ -1,0 +1,30 @@
+---
+import { site } from '../config';
+import { t, path, type Lang } from '../i18n/site';
+interface Props { lang: Lang; page: '' | 'support/' | 'privacy/' }
+const { lang, page } = Astro.props;
+const s = t[lang];
+const other: Lang = lang === 'en' ? 'ja' : 'en';
+---
+<footer class="container foot">
+  <nav aria-label="Footer">
+    <a class="brand" href={path(lang, '')}>Hinto</a>
+    <span class="links">
+      <a href={path(lang, 'support/')}>{s.nav.support}</a>
+      <span aria-hidden="true">·</span>
+      <a href={path(lang, 'privacy/')}>{s.nav.privacy}</a>
+      <span aria-hidden="true">·</span>
+      <a href={path(other, page)} hreflang={t[other].htmlLang} lang={t[other].htmlLang}>{s.switchLabel}</a>
+    </span>
+  </nav>
+  <p>© 2026 {site.publisher}</p>
+  <p>{s.trademark}</p>
+</footer>
+<style>
+  .foot { border-top: 1px solid var(--line); padding-top: 32px; padding-bottom: 48px; font-size: .8125rem; color: var(--muted); }
+  nav { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; align-items: center; }
+  .brand { color: var(--ink); font-weight: 800; font-size: 1rem; text-decoration: none; }
+  .links { display: inline-flex; gap: 10px; flex-wrap: wrap; }
+  .links a { min-height: 44px; display: inline-flex; align-items: center; }
+  p { margin: 12px 0 0; }
+</style>

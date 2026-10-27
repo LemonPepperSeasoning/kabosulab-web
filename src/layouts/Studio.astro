@@ -1,0 +1,46 @@
+---
+// The Kabosu Lab pages: SEO, the studio header and footer. Each app has its own layout in src/apps/<app>/layouts/.
+import '../styles/studio.css';
+import { studio, href } from '../apps';
+
+interface Props { title: string; description: string; noindex?: boolean }
+const { title, description, noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FAFAF7" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121411" />
+    <link rel="icon" href={href('favicon.svg')} type="image/svg+xml" />
+    <link rel="sitemap" href={href('sitemap-index.xml')} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={studio.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+  </head>
+  <body>
+    <header class="container head">
+      <a class="brand" href={href('')}><img src={href('favicon.svg')} alt="" width="28" height="28" />{studio.name}</a>
+    </header>
+    <main id="main"><slot /></main>
+    <footer class="container foot">
+      <p>© 2026 {studio.name} · <a href={`mailto:${studio.email}`}>{studio.email}</a></p>
+      <p>Apple, the Apple logo, iPhone, iPad and App Store are trademarks of Apple Inc., registered in the U.S. and other countries.</p>
+    </footer>
+  </body>
+</html>
+<style>
+  .head { display: flex; align-items: center; min-height: 72px; }
+  .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); font-weight: 650; font-size: 1.0625rem; text-decoration: none; }
+  .foot { border-top: 1px solid var(--line); padding-top: 24px; padding-bottom: 48px; margin-top: var(--section-y); font-size: .8125rem; color: var(--muted); }
+  .foot p { margin-top: 8px; max-width: 46em; }
+  .foot a { color: var(--muted); }
+</style>

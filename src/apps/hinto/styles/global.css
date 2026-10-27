@@ -1,0 +1,112 @@
+/* Hinto website: the app's Card Table look (DS tokens in the app's Tokens.swift), per the ui-designer's spec. */
+:root {
+  color-scheme: light dark;
+  --font-sans: ui-rounded, "SF Pro Rounded", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP",
+               "Noto Sans CJK JP", "BIZ UDPGothic", Meiryo, system-ui, sans-serif;
+
+  --table: #ECE8E1; --table-centre: #F6F3EE; --card: #FFFDF9; --surface-inset: #F3EFE8;
+  --ink: #1F2A2E; --on-ink: #FFFFFF;
+  --muted: #5B6266;          /* secondary text (the app's muted fails AA for body text on the web) */
+  --muted-graphic: #7D8589;
+  --teal: #0F766E; --teal-text: #0B5D57; --tonal-bg: #DCEFEB;
+  --streak: #D9620F; --streak-text: #A84A12; --gold: #F2B84B;
+  --line: rgb(31 42 46 / .08); --chip-border: #CFC9BF; --card-glyph: #D5D0C7; --stack-edge: rgb(0 0 0 / .06);
+  --focus: #0F766E;
+  --bg-table: radial-gradient(ellipse 70% 70% at 50% 30%, var(--table-centre) 0%, var(--table) 100%);
+
+  --shadow-stack: 0 14px 36px rgb(31 42 46 / .30);
+  --shadow-hover: 0 20px 36px rgb(31 42 46 / .30);
+  --shadow-card: 0 7px 18px rgb(31 42 46 / .22);
+  --shadow-pill: 0 5px 14px rgb(31 42 46 / .18);
+
+  --fs-display: clamp(2.25rem, 1.5rem + 3.2vw, 3.75rem);
+  --fs-h2: clamp(1.625rem, 1.3rem + 1.4vw, 2.25rem);
+  --fs-h3: clamp(1.25rem, 1.15rem + .4vw, 1.375rem);
+  --fs-lead: clamp(1.0625rem, 1rem + .4vw, 1.25rem);
+  --fs-body: 1.0625rem; --fs-small: .9375rem; --fs-label: .75rem;
+  --lh-tight: 1.15; --lh-body: 1.6;
+
+  --gutter: clamp(20px, 4vw, 32px); --container: 1080px; --section-y: clamp(64px, 8vw, 96px);
+  --r-m: 12px; --r-xl: 24px; --r-stack: 20px; --r-row: 18px; --r-chip: 10px; --r-pill: 999px;
+  --ease-press: cubic-bezier(.3, 1.6, .5, 1);
+}
+:root:lang(ja) {
+  --fs-display: clamp(1.875rem, 1.3rem + 2.6vw, 3.125rem);
+  --fs-h2: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  --lh-tight: 1.35; --lh-body: 1.85;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --table: #191715; --table-centre: #24211E; --card: #2A2622; --surface-inset: #221F1C;
+    --ink: #F3EEE6; --on-ink: #1F2A2E; --muted: #A39D94; --muted-graphic: #A39D94;
+    --teal: #2DD4BF; --teal-text: #2DD4BF; --tonal-bg: #183330;
+    --streak: #FF8A3D; --streak-text: #FFA463; --gold: #F5C25E;
+    --line: rgb(255 255 255 / .09); --chip-border: #4A443D; --card-glyph: #4D4740; --stack-edge: rgb(255 255 255 / .07);
+    --focus: #2DD4BF;
+    --shadow-stack: 0 14px 36px rgb(0 0 0 / .65); --shadow-hover: 0 20px 36px rgb(0 0 0 / .65);
+    --shadow-card: 0 7px 18px rgb(0 0 0 / .5); --shadow-pill: 0 5px 14px rgb(0 0 0 / .5);
+  }
+}
+@media (prefers-contrast: more) { :root { --ink: #0F1517; --teal: #0B5D57; --streak-text: #8F3E0C; } }
+@media (prefers-contrast: more) and (prefers-color-scheme: dark) { :root { --ink: #FFFFFF; --muted: #C4BEB5; --teal: #5EEAD4; --teal-text: #5EEAD4; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; }
+}
+
+/* Base */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; overflow-x: clip; color: var(--ink); background: var(--table); background-image: var(--bg-table); background-attachment: fixed;
+  font: var(--fs-body)/var(--lh-body) var(--font-sans); -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 { line-height: var(--lh-tight); text-wrap: balance; margin: 0; }
+p, h1, h2, h3, li { overflow-wrap: anywhere; }
+p { text-wrap: pretty; }
+:lang(ja) h1, :lang(ja) h2, :lang(ja) h3 { font-feature-settings: "palt"; letter-spacing: .02em; }
+/* Japanese headings break only at punctuation and <wbr> (Safari ignores auto-phrase); anywhere as a last resort. */
+:lang(ja) h1 { word-break: keep-all; }
+:lang(ja) { line-break: strict; word-break: auto-phrase; }
+a { color: var(--teal-text); text-decoration-thickness: 1.5px; text-underline-offset: .2em; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 6px; }
+img { max-width: 100%; height: auto; display: block; }
+.icon svg { width: 22px; height: 22px; display: block; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.container { max-width: calc(var(--container) + 2 * var(--gutter)); margin: 0 auto; padding: 0 var(--gutter); }
+.section { padding-block: var(--section-y); }
+.label { font-size: var(--fs-label); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--teal-text); margin: 0 0 12px; }
+:lang(ja) .label { text-transform: none; letter-spacing: 0; font-size: .8125rem; }
+.lead { font-size: var(--fs-lead); font-weight: 500; color: var(--muted); }
+.small { font-size: var(--fs-small); color: var(--muted); }
+.paper { background: var(--card); border: .5px solid var(--stack-edge); border-radius: var(--r-row); box-shadow: var(--shadow-card); }
+
+/* Install: a plain "coming soon" pill (never an imitation of Apple's badge), or Apple's badge as is. */
+.soon {
+  display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 20px; margin: 0;
+  border-radius: var(--r-pill); background: var(--card); color: var(--ink); box-shadow: var(--shadow-pill);
+  font-weight: 700;
+}
+.soon::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--streak); }
+.badge { display: inline-block; padding: 12px 0; }
+.badge img { height: 48px; width: auto; }
+
+/* Buddies (ported from the design kit's mood CSS: idle, blink, happy, sleep; never sad on the site) */
+.mascot { display: inline-block; }
+.mascot svg { width: 100%; height: 100%; overflow: visible; display: block; }
+.mascot .m-all { transform-box: view-box; transform-origin: 50% 96%; animation: m-idle 3.4s ease-in-out infinite; animation-delay: var(--delay, 0s); }
+.mascot .m-eye { transform-box: fill-box; transform-origin: center; animation: m-blink 4.6s infinite; }
+.mascot .m-eyes-happy, .mascot .m-mouth-happy, .mascot .m-mouth-sad, .mascot .m-eyes-sleep, .mascot .m-tear, .mascot .m-zz { display: none; }
+.mascot.pose-happy .m-eyes, .mascot.pose-happy .m-mouth { display: none; }
+.mascot.pose-happy .m-eyes-happy, .mascot.pose-happy .m-mouth-happy { display: inline; }
+.mascot.pose-sleep .m-eyes { display: none; }
+.mascot.pose-sleep .m-eyes-sleep, .mascot.pose-sleep .m-zz { display: inline; }
+.mascot.pose-sleep .m-all { animation: m-snore 2.6s ease-in-out infinite; }
+.mascot.pose-sleep .m-zz text { animation: m-z 2.6s ease-in-out infinite; }
+.mascot.pose-sleep .m-zz text + text { animation-delay: .6s; }
+.mascot .m-tail { transform-box: fill-box; transform-origin: 0% 100%; animation: m-swish 2.4s ease-in-out infinite; }
+@keyframes m-idle { 50% { transform: translateY(-2.5%) scale(1.02, .98); } }
+@keyframes m-blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.08); } }
+@keyframes m-snore { 50% { transform: scale(1.04, .96); } }
+@keyframes m-z { 0% { opacity: 0; transform: translate(0, 6px); } 40% { opacity: 1; } 100% { opacity: 0; transform: translate(4px, -6px); } }
+@keyframes m-swish { 50% { transform: rotate(-16deg); } }

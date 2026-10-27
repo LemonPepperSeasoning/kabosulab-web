@@ -1,0 +1,67 @@
+---
+import Base from '../../layouts/Base.astro';
+import Buddy from '../Buddy.astro';
+import Icon from '../Icon.astro';
+import { site } from '../../config';
+import { t, type Lang } from '../../i18n/site';
+import { help } from '../../i18n/help';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t[lang];
+const topics = help[lang];
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: topics.flatMap((tp) => tp.items.map((i) => ({ '@type': 'Question', name: i.q, acceptedAnswer: { '@type': 'Answer', text: i.a } }))),
+};
+---
+<Base lang={lang} page="support/" title={`${s.supportTitle} · Hinto`} description={s.supportDescription} jsonLd={jsonLd}>
+  <article class="container reading">
+    <h1>{s.supportTitle}</h1>
+    <p class="lead">{s.supportLead}</p>
+
+    <div class="paper contact">
+      <Buddy name="pochi" size={64} />
+      <div>
+        <h2>{s.contactTitle}</h2>
+        <p>{s.contactBody} <a href={`mailto:${site.email}`}>{site.email}</a>{lang === 'en' ? '. ' : '　'}{s.contactAfter}</p>
+        <p class="small">{s.debugTip}</p>
+      </div>
+    </div>
+
+    <nav class="chips" aria-label={s.supportTitle}>
+      {topics.map((tp, i) => <a href={`#topic-${i + 1}`}>{tp.title}</a>)}
+    </nav>
+
+    {topics.map((tp, i) => (
+      <section id={`topic-${i + 1}`}>
+        <h2>{tp.title}</h2>
+        {tp.items.map((item) => (
+          <details>
+            <summary><Icon name="chevron-right" size={18} /><span>{item.q}</span></summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </section>
+    ))}
+  </article>
+</Base>
+
+<style>
+  .reading { max-width: calc(68ch + 2 * var(--gutter)); padding-bottom: var(--section-y); }
+  :lang(ja) .reading { max-width: calc(38em + 2 * var(--gutter)); }
+  h1 { font-size: var(--fs-h2); font-weight: 800; margin: 24px 0 12px; }
+  h2 { font-size: 1.375rem; font-weight: 800; margin: 2.2em 0 .6em; }
+  .contact { display: flex; gap: 16px; align-items: flex-start; padding: 24px; margin: 28px 0; }
+  .contact h2 { margin: 0 0 6px; font-size: 1.125rem; }
+  .contact p { margin: 0 0 8px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chips a { border: 1.5px solid var(--chip-border); border-radius: var(--r-chip); padding: 8px 12px; color: var(--muted);
+             text-decoration: none; font-size: var(--fs-small); font-weight: 700; min-height: 44px; display: inline-flex; align-items: center; }
+  details { border-bottom: 1px solid var(--line); }
+  summary { list-style: none; cursor: pointer; display: flex; gap: 10px; align-items: center; min-height: 48px; padding: 8px 0; font-weight: 700; }
+  summary::-webkit-details-marker { display: none; }
+  summary :global(.icon) { transition: transform .2s; color: var(--muted-graphic); flex: none; }
+  details[open] summary :global(.icon) { transform: rotate(90deg); }
+  details p { margin: 0 0 16px 28px; color: var(--muted); }
+</style>

@@ -1,0 +1,37 @@
+---
+import Base from '../../layouts/Base.astro';
+import { t, type Lang } from '../../i18n/site';
+import { privacy, contactEmail } from '../../i18n/privacy';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t[lang];
+const p = privacy[lang];
+const linkEmail = (text: string) => text.replace(contactEmail, `<a href="mailto:${contactEmail}">${contactEmail}</a>`);
+---
+<Base lang={lang} page="privacy/" title={`${p.title} · Hinto`} description={s.privacyDescription}>
+  <article class="container reading">
+    <h1>{p.title}</h1>
+    <p class="small">{p.updated}</p>
+    <div class="paper short">
+      <p class="label">{s.inShort}</p>
+      <ul>{s.inShortPoints.map((x) => <li>{x}</li>)}</ul>
+    </div>
+    <p class="lead">{p.intro}</p>
+    {p.sections.map((sec, i) => (
+      <section id={`s${i + 1}`}>
+        <h2>{sec.heading}</h2>
+        {sec.body.map((para) => <p set:html={linkEmail(para)} />)}
+      </section>
+    ))}
+  </article>
+</Base>
+
+<style>
+  .reading { max-width: calc(68ch + 2 * var(--gutter)); padding-bottom: var(--section-y); }
+  :lang(ja) .reading { max-width: calc(38em + 2 * var(--gutter)); }
+  h1 { font-size: var(--fs-h2); font-weight: 800; margin: 24px 0 8px; }
+  h2 { font-size: 1.375rem; font-weight: 800; margin: 2.2em 0 .6em; }
+  .short { padding: 20px 24px; margin: 24px 0; }
+  .short ul { margin: 0; padding-inline-start: 1.25em; display: grid; gap: .4em; }
+  p { margin: 0 0 1em; }
+</style>

@@ -1,0 +1,24 @@
+---
+import { site } from '../config';
+import { t, path, type Lang } from '../i18n/site';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t[lang];
+---
+<footer class="container foot">
+  <nav aria-label="Footer">
+    <a href={path(lang, '')}>Hasha</a>
+    <a href={path(lang, 'support/')}>{s.nav.support}</a>
+    <a href={path(lang, 'privacy/')}>{s.nav.privacy}</a>
+    <a href={import.meta.env.BASE_URL}>{s.nav.studio}</a>
+  </nav>
+  <p>© 2026 {site.publisher}</p>
+  <p>{s.trademark}</p>
+</footer>
+<style>
+  .foot { border-top: 1px solid var(--line); padding-top: 24px; padding-bottom: 48px; margin-top: var(--section-y); font-size: .8125rem; color: var(--muted); }
+  nav { display: flex; flex-wrap: wrap; gap: 0 20px; margin-bottom: 8px; }
+  nav a { color: var(--muted); min-height: 44px; display: inline-flex; align-items: center; }
+  nav a:hover { color: var(--ink); }
+  p { margin-top: 8px; max-width: 46em; }
+</style>

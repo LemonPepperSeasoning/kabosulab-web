@@ -1,0 +1,162 @@
+---
+import Base from '../../layouts/Base.astro';
+import Buddy from '../Buddy.astro';
+import Icon from '../Icon.astro';
+import InstallBadge from '../InstallBadge.astro';
+import PhoneShot from '../PhoneShot.astro';
+import { site, appStoreURL } from '../../config';
+import { t, path, type Lang } from '../../i18n/site';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t[lang];
+const origin = Astro.site!.origin;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'MobileApplication',
+      name: 'Hinto',
+      alternateName: 'おぼえる',
+      operatingSystem: `iOS ${site.minimumIOS}+`,
+      applicationCategory: 'EducationalApplication',
+      description: s.description,
+      inLanguage: ['en', 'ja', 'zh-Hans', 'ko', 'vi', 'fil', 'ne'],
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      url: new URL(path(lang, ''), origin).href,
+      ...(appStoreURL() ? { installUrl: appStoreURL() } : {}),
+      publisher: { '@type': 'Organization', name: site.publisher, email: site.email },
+    },
+  ],
+};
+---
+<Base lang={lang} page="" title={s.title} description={s.description} jsonLd={jsonLd}>
+  <section class="container hero">
+    <div class="hero-text">
+      <p class="label">{s.heroLabel}</p>
+      <h1 set:html={s.heroTitle} />
+      <p class="lead">{s.heroLead}</p>
+      <InstallBadge lang={lang} />
+      <p class="small">{s.heroSmall}</p>
+    </div>
+    <div class="hero-visual">
+      <div class="stack">
+        <span class="under u1"></span><span class="under u2"></span><span class="under u3"></span>
+        <div class="face" lang="ja">
+          <p class="card-label">{s.cardLabel}</p>
+          <p class="reading">おぼえる</p>
+          <p class="term">覚える</p>
+          <p class="meaning" lang={s.htmlLang}>{s.cardMeaning}</p>
+          <span class="glyph" aria-hidden="true">覚</span>
+        </div>
+        <Buddy name="kotaro" size={128} class="on-stack" />
+      </div>
+    </div>
+  </section>
+
+  {s.features.map((f, i) => (
+    <section class={`container section feature ${i % 2 ? 'flip' : ''}`}>
+      <div class="feature-text">
+        <p class="label">{f.label}</p>
+        <h2>{f.title}</h2>
+        <p class="lead">{f.body}</p>
+      </div>
+      <div class="feature-shot">
+        {f.buddy && <Buddy name={f.buddy as 'kai' | 'pochi'} pose="happy" size={88} class={`peek ${i % 2 ? 'right' : 'left'}`} />}
+        <PhoneShot lang={lang} shot={f.shot} alt={s.shotAlt[f.shot as keyof typeof s.shotAlt]} width={280} />
+      </div>
+    </section>
+  ))}
+
+  <section class="container section">
+    <div class="paper privacy">
+      <p class="label">{s.privacyLabel}</p>
+      <h2>{s.privacyTitle}</h2>
+      <ul class="points">
+        {s.privacyPoints.map((p) => (
+          <li><span class="dot"><Icon name={p.icon} /></span><span><strong>{p.title}</strong> {p.body}</span></li>
+        ))}
+      </ul>
+      <a class="more" href={path(lang, 'privacy/')}>{s.privacyLink} <Icon name="arrow-right" size={18} /></a>
+      <Buddy name="kai" pose="sleep" size={84} class="sleeper" />
+    </div>
+  </section>
+
+  <section class="section strip-section">
+    <div class="container"><h2>{s.stripTitle}</h2></div>
+    <ul class="strip container">
+      {s.strip.map((x) => (
+        <li><PhoneShot lang={lang} shot={x.shot} alt={s.shotAlt[x.shot as keyof typeof s.shotAlt]} width={200} /><p class="small">{x.caption}</p></li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="container section cta">
+    <div class="trio">
+      <Buddy name="kotaro" pose="happy" size={96} />
+      <Buddy name="pochi" pose="happy" size={96} delay=".4s" />
+      <Buddy name="kai" pose="happy" size={96} delay=".8s" />
+    </div>
+    <h2>{s.ctaTitle}</h2>
+    <p class="lead">{s.ctaLead}</p>
+    <InstallBadge lang={lang} />
+    <p class="small">{s.requires}</p>
+  </section>
+</Base>
+
+<style>
+  .hero { display: grid; grid-template-columns: minmax(0, 1fr); gap: 48px; padding-top: 24px; padding-bottom: var(--section-y); align-items: center; }
+  .hero h1 { font-size: var(--fs-display); font-weight: 800; margin-bottom: 16px; }
+  .hero .lead { margin: 0 0 24px; max-width: 34em; }
+  .hero .small { margin-top: 12px; }
+  .hero-visual { display: flex; justify-content: center; padding-top: 40px; }
+
+  .stack { position: relative; width: 260px; height: 320px; }
+  .under, .face { position: absolute; inset: 0; border-radius: var(--r-stack); background: var(--card); border: 1px solid var(--stack-edge); }
+  .u1 { transform: translate(-8px, 14px) rotate(-6deg); }
+  .u2 { transform: translate(8px, 8px) rotate(4deg); }
+  .u3 { transform: translate(-2px, 4px) rotate(-2deg); }
+  .face { box-shadow: var(--shadow-stack); padding: 22px; overflow: hidden; display: flex; flex-direction: column; animation: float 2s ease-in-out infinite alternate; }
+  @keyframes float { to { transform: translateY(-6px); box-shadow: var(--shadow-hover); } }
+  .face p { margin: 0; }
+  .card-label { font-size: var(--fs-label); font-weight: 700; color: var(--teal-text); letter-spacing: .04em; }
+  .reading { margin-top: auto !important; text-align: center; font-size: 1.375rem; font-weight: 600; color: var(--teal-text); }
+  .term { text-align: center; font-size: 3.5rem; font-weight: 800; line-height: 1.2; }
+  .meaning { text-align: center; color: var(--muted); margin-bottom: auto !important; }
+  .glyph { position: absolute; right: -10px; bottom: -36px; font-size: 140px; font-weight: 800; color: var(--card-glyph); opacity: .55; line-height: 1; }
+  :global(.on-stack) { position: absolute; top: -78px; right: -20px; }
+
+  .feature { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; align-items: center; }
+  .feature h2 { font-size: var(--fs-h2); font-weight: 800; margin-bottom: 12px; }
+  .feature .lead { margin: 0; max-width: 32em; }
+  .feature-shot { position: relative; justify-self: center; width: min(280px, 72vw); }
+  :global(.peek) { position: absolute; top: -56px; z-index: 1; }
+  :global(.peek.left) { left: -28px; }
+  :global(.peek.right) { right: -28px; }
+
+  .privacy { position: relative; border-radius: var(--r-xl); padding: clamp(24px, 4vw, 48px); }
+  .privacy h2 { font-size: var(--fs-h2); font-weight: 800; }
+  .points { list-style: none; padding: 0; margin: 28px 0; display: grid; gap: 20px; }
+  .points li { display: flex; gap: 14px; align-items: flex-start; }
+  .dot { flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--tonal-bg); color: var(--teal); display: grid; place-items: center; }
+  .more { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; min-height: 44px; }
+  :global(.sleeper) { position: absolute; right: 24px; bottom: -28px; }
+
+  .strip-section h2 { font-size: var(--fs-h2); font-weight: 800; margin-bottom: 24px; }
+  .strip { list-style: none; margin: 0 auto; display: grid; grid-auto-flow: column; grid-auto-columns: 200px; gap: 24px;
+           overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); padding-bottom: 16px; }
+  .strip li { scroll-snap-align: start; text-align: center; }
+
+  .cta { text-align: center; }
+  .cta h2 { font-size: var(--fs-h2); font-weight: 800; margin: 16px 0 12px; }
+  .cta .lead { margin: 0 auto 24px; max-width: 30em; }
+  .trio { display: flex; justify-content: center; gap: 8px; }
+
+  @media (min-width: 960px) {
+    .hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; padding-top: 48px; }
+    .stack { width: 320px; height: 400px; }
+    .feature { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; }
+    .feature.flip .feature-text { order: 2; }
+    .points { grid-template-columns: 1fr 1fr; }
+    .strip { grid-template-columns: repeat(5, 1fr); grid-auto-flow: row; overflow: visible; }
+  }
+</style>
