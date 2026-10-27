@@ -13,9 +13,9 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
-    "astro": "^7.3.8"
+    "astro": "7.3.8"
   },
   "devDependencies": {
-    "lucide-static": "^1.62.0"
+    "lucide-static": "1.57.0"
   }
 }

@@ -9,5 +9,6 @@ export default defineConfig({
   base: '/kabosulab-web',
   trailingSlash: 'always',
   output: 'static',
-  integrations: [sitemap()],
+  // Apps' own 404 pages (for example /hinto/404/) are noindex, so they stay out of the sitemap.
+  integrations: [sitemap({ filter: (page) => !page.includes('/404/') })],
 });

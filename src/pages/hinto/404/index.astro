@@ -1,0 +1,19 @@
+---
+import Base from '../../../apps/hinto/layouts/Base.astro';
+import Buddy from '../../../apps/hinto/components/Buddy.astro';
+import { t, path } from '../../../apps/hinto/i18n/site';
+// Hinto's 404 (from Hinto-web), in both languages. GitHub Pages serves only the site-wide 404.html, which sends
+// missing /hinto/ addresses here.
+---
+<Base lang="en" page="" title="Page not found · Hinto" description="This page doesn't exist." noindex>
+  <section class="container nf">
+    <Buddy name="pochi" pose="sleep" size={120} />
+    <h1>{t.en.notFoundTitle}</h1>
+    <p lang="ja" class="lead">{t.ja.notFoundTitle}</p>
+    <p><a href={path('en', '')}>{t.en.notFoundLink}</a> · <a lang="ja" href={path('ja', '')}>{t.ja.notFoundLink}</a></p>
+  </section>
+</Base>
+<style>
+  .nf { text-align: center; padding: var(--section-y) var(--gutter); }
+  h1 { font-size: var(--fs-h2); font-weight: 800; margin: 16px 0 8px; }
+</style>
