@@ -1,0 +1,40 @@
+---
+import Base from '../../layouts/Base.astro';
+import { site } from '../../config';
+import { t, type Lang } from '../../i18n/site';
+import { privacy, contactEmail } from '../../i18n/privacy';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t[lang];
+const p = privacy[lang];
+const linkEmail = (text: string) => text.replace(contactEmail, `<a href="mailto:${contactEmail}">${contactEmail}</a>`)
+  .replace('Apple’s privacy policy', '<a href="https://www.apple.com/legal/privacy/">Apple’s privacy policy</a>');
+---
+<Base lang={lang} page="privacy/" title={`${p.title} · ${site.name}`} description={s.privacyDescription}>
+  <article class="container reading">
+    <h1>{p.title}</h1>
+    <p class="small">{p.updated}</p>
+    <div class="paper short">
+      <h2>{s.inShort}</h2>
+      <ul>{s.inShortPoints.map((x) => <li>{x}</li>)}</ul>
+    </div>
+    <p class="lead">{p.intro}</p>
+    {p.sections.map((sec, i) => (
+      <section id={`s${i + 1}`}>
+        <h2>{sec.heading}</h2>
+        {sec.body.map((para) => <p set:html={linkEmail(para)} />)}
+      </section>
+    ))}
+  </article>
+</Base>
+
+<style>
+  .reading { max-width: calc(42em + 2 * var(--gutter)); padding-top: var(--section-y); }
+  h1 + .small { margin-top: 12px; }
+  h2 { font-size: 1.375rem; margin: 2.2em 0 .6em; }
+  .short { padding: 20px 24px; margin: 32px 0; }
+  .short h2 { font-size: 1.1875rem; margin: 0 0 8px; }
+  .short ul { margin: 0; padding-inline-start: 1.25em; display: grid; gap: .4em; }
+  .lead { margin-bottom: 1em; }
+  section p { margin: 0 0 1em; }
+</style>

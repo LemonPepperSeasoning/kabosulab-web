@@ -1,0 +1,27 @@
+<!doctype html>
+<!-- The share image, public/unixtime/og.png (1200 × 630). Re-render after changing the icon or words:
+     "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --hide-scrollbars \
+       --window-size=1200,630 --screenshot=public/unixtime/og.png "file://$PWD/scripts/unixtime/og.html" -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; width: 1200px; height: 630px; background: #000; overflow: hidden; }
+  body { display: flex; flex-direction: column; justify-content: center; padding: 0 88px; box-sizing: border-box;
+         font-family: ui-monospace, "SF Mono", Menlo, monospace; color: #F2F2EE; }
+  .brand { display: flex; align-items: center; gap: 20px; font: 600 34px -apple-system, system-ui, sans-serif; }
+  .brand img { width: 72px; height: 72px; border-radius: 22.4%; }
+  .label { margin-top: 56px; font-size: 22px; letter-spacing: .24em; color: #5E5E5A; }
+  .now { margin-top: 14px; font-size: 150px; font-weight: 500; line-height: 1; color: #3DFF7A;
+         text-shadow: 0 0 40px rgb(61 255 122 / .3); }
+  .line { margin-top: 36px; font-size: 30px; color: #9B9B96; }
+  .line b { color: #3DFF7A; font-weight: 500; }
+</style>
+</head>
+<body>
+  <div class="brand"><img src="../../public/unixtime/app-icon.png" alt="">Unixtime</div>
+  <div class="label">UNIX TIME</div>
+  <div class="now" id="now">1792836000</div>
+  <div class="line">Pin the seconds that matter. <b>Watch them count.</b></div>
+</body>
+</html>
