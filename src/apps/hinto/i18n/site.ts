@@ -1,4 +1,5 @@
-// The website's own words, in English and Japanese (copy from the ui-designer's spec, 2026-10-15).
+// The website's own words, in English and Japanese (copy from the ui-designer's spec, 2026-10-15; 1.0 refresh 2026-10-28).
+// Like the App Store listings: English speaks to people learning Japanese, Japanese to Japanese speakers learning English.
 export type Lang = 'en' | 'ja';
 export const langs: Lang[] = ['en', 'ja'];
 
@@ -8,19 +9,19 @@ export const t = {
     ogLocale: 'en_US',
     switchLabel: '日本語',
     title: 'Hinto: Photograph a page, get flashcards (iPhone)',
-    description: 'Turn textbook pages, notes and practice tests into flashcards on your iPhone. Short daily study, free, no account, no tracking.',
+    description: 'Turn pages of Japanese into flashcards on your iPhone, or start with Hinto’s Japanese and kanji decks. Short daily study, free, no account, no tracking.',
     heroLabel: 'Flashcards for iPhone',
     heroTitle: 'Photograph a page, get flashcards.',
-    heroLead: 'Snap a textbook page, your notes or a practice test. Hinto turns it into cards right on your iPhone, then helps you study a few minutes a day.',
+    heroLead: 'Snap a page of your Japanese textbook, a worksheet or a letter from school. Hinto turns it into cards with readings and meanings, right on your iPhone. Then study a few minutes a day.',
     heroSmall: 'Free. No account. No tracking.',
     soon: 'Coming soon to the App Store',
     badgeAlt: 'Download on the App Store',
-    cardLabel: 'N3 · Verb',
-    cardMeaning: 'to memorise, to learn by heart',
+    card: { lang: 'ja', label: 'Verb', reading: 'おぼえる', term: '覚える', meaning: 'to memorise, to learn by heart', glyph: '覚' },
     features: [
       { label: 'Scan → cards', title: 'From a page to a deck', body: 'Scan pages, pick photos or open a PDF. Hinto reads each page and drafts a card for every word or question. Check them, fix anything you like, and add them to a deck.', shot: 'review', buddy: 'kai' },
+      { label: 'Ready-made decks', title: 'Or start with Hinto’s decks', body: 'Japanese vocabulary by level, and kanji by school grade (1–6), then every jōyō kanji. A level path shows where you are and what comes next. Learning English too? There are decks from CEFR A1 to B2.', shot: 'discover', buddy: 'kotaro' },
       { label: 'A short run, every day', title: 'A little each day', body: 'Study a small run of cards: swipe right if you knew it, left if you forgot. Every day you study gets a stamp on your calendar. Took a day off? Your stamps stay. Just pick up again tomorrow.', shot: 'study', buddy: 'pochi' },
-      { label: 'Quiz cards', title: 'Multiple choice, JLPT style', body: 'A question like 今日は図書館で（　）する keeps its choices. Tap an answer and Hinto marks it for you. Good for the JLPT or any test with options.', shot: 'choices', buddy: '' },
+      { label: 'Quiz cards', title: 'Multiple choice, exam style', body: 'A question like 毎朝、公園で（　）をしています keeps its choices. Tap an answer and Hinto marks it for you. Good for any test with options.', shot: 'choices', buddy: '' },
     ],
     privacyLabel: 'Private by design',
     privacyTitle: 'Your cards stay on your iPhone.',
@@ -56,26 +57,26 @@ export const t = {
     inShortPoints: ['No account, and no server that receives your data.', 'No analytics, ads or tracking.', 'Your cards, scans and history stay on your iPhone (and its iCloud backup).', 'Pages are read on your iPhone.', 'Deck files and debug info leave only when you send them. Discover downloads Hinto’s decks; nothing is uploaded.', 'Crash reports stay on your iPhone, unless you share debug info or let Apple share anonymous crash data with app developers.'],
     notFoundTitle: 'This page is taking a nap.',
     notFoundLink: 'Back to Hinto',
-    shotAlt: { review: 'Review cards: the cards Hinto found on a scanned page', study: 'The Study tab: today\'s deck, the streak and this week', choices: 'A multiple-choice card in a run', run: 'A run: a card flipped to its answer', waiting: 'Making cards: reading the pages', end: 'The end of a run', library: 'The Library with every deck' },
+    shotAlt: { review: 'Review cards: the cards Hinto found on a scanned page', discover: 'Discover: the kanji level path and decks by school grade', study: 'The Study tab: today\'s deck, the streak and this week', choices: 'A multiple-choice card in a run', run: 'A run: a card flipped to its answer', waiting: 'Making cards: reading the pages', end: 'The end of a run', library: 'The Library with every deck' },
   },
   ja: {
     htmlLang: 'ja',
     ogLocale: 'ja_JP',
     switchLabel: 'English',
-    title: 'Hinto（おぼえる）｜撮るだけで作れる単語帳・暗記カードアプリ',
-    description: '教科書やノート、問題集のページを撮るだけで暗記カードに。iPhoneの中で作れて、毎日すこしずつ続けられる無料の単語帳アプリ。アカウント登録不要。',
+    title: 'Hinto｜撮るだけで作れる単語帳・暗記カードアプリ',
+    description: '英語の教科書やプリントのページを撮るだけで単語カードに。CEFRレベル別の英単語デッキも。毎日すこしずつ続けられる無料の単語帳アプリ。アカウント登録不要。',
     heroLabel: 'iPhoneの暗記カードアプリ',
-    heroTitle: 'ページを撮れば、<wbr>暗記カードのできあがり。',
-    heroLead: '教科書、ノート、問題集。撮ったページから、iPhoneの中でカードを作ります。あとは1日数分、すこしずつ覚えるだけ。',
+    heroTitle: 'ページを撮れば、<wbr>暗記カードの<wbr>できあがり。',
+    heroLead: '英語の教科書、プリント、ノート。撮ったページから、iPhoneの中でカードを作ります。あとは1日数分、すこしずつ覚えるだけ。',
     heroSmall: '無料。アカウント登録なし。トラッキングなし。',
     soon: 'App Storeで近日公開',
     badgeAlt: 'App Storeからダウンロード',
-    cardLabel: 'N3・動詞',
-    cardMeaning: '記憶する。身につける。',
+    card: { lang: 'en', label: '英単語・動詞', reading: '', term: 'memorize', meaning: '覚える。暗記する。', glyph: 'M' },
     features: [
       { label: '撮る → カード', title: 'ページから、そのままデッキへ', body: 'ページをスキャン、写真を選ぶ、PDFを開く。Hintoがページを読み取り、単語や問題ごとにカードの下書きを作ります。確認して、必要なら直して、デッキに追加するだけ。', shot: 'review', buddy: 'kai' },
+      { label: 'Hintoのデッキ', title: 'レベル別の英単語から始める', body: 'CEFR A1〜B2の英単語デッキを、レベル順のコースで。いまどこにいて、次は何をやるかがひと目でわかります。日本語を学ぶ人のための、漢字や日本語の単語のデッキもあります。', shot: 'discover', buddy: 'kotaro' },
       { label: '毎日すこしずつ', title: '続けやすい、短い勉強', body: '毎日、少しのカードを解いていきます。覚えていたら右へ、忘れていたら左へスワイプ。勉強した日はカレンダーにスタンプ。休んだ日があっても、押したスタンプは消えません。また明日から。', shot: 'study', buddy: 'pochi' },
-      { label: '選択問題', title: '選択問題も、そのままカードに', body: '「今日は図書館で（　）する」のような問題は、選択肢ごとカードになります。答えをタップすれば自動で採点。JLPTや資格試験の練習に。', shot: 'choices', buddy: '' },
+      { label: '選択問題', title: '選択問題も、そのままカードに', body: '「I have lived in this town (　) 2020.」のような問題は、選択肢ごとカードになります。答えをタップすれば自動で採点。定期テストや資格試験の練習に。', shot: 'choices', buddy: '' },
     ],
     privacyLabel: 'プライバシー',
     privacyTitle: 'カードは、あなたのiPhoneの中に。',
@@ -111,7 +112,7 @@ export const t = {
     inShortPoints: ['アカウントも、データを受け取るサーバーもありません。', 'アクセス解析・広告・トラッキングはありません。', 'カード、スキャン、学習履歴はiPhone（とそのiCloudバックアップ）の中に。', 'ページはiPhoneの中で読み取ります。', 'デッキファイルとデバッグ情報は、あなたが送ったときだけ外に出ます。「見つける」はHintoのデッキをダウンロードするだけで、何もアップロードしません。', 'クラッシュレポートはiPhoneの中に保存されます。デバッグ情報を送るか、Appleによる匿名のクラッシュデータ共有をオンにしている場合を除きます。'],
     notFoundTitle: 'このページはおやすみ中です。',
     notFoundLink: 'トップへ戻る',
-    shotAlt: { review: 'カードを確認：スキャンしたページから見つかったカード', study: '学習タブ：今日のデッキ、連続記録、今週', choices: '学習中の選択問題カード', run: '学習中：答えを表示したカード', waiting: 'カードを作成中：ページを読み取り', end: '学習の終わり', library: 'すべてのデッキが並ぶライブラリ' },
+    shotAlt: { review: 'カードを確認：スキャンしたページから見つかったカード', discover: '見つける：英単語のレベル別コースとデッキ', study: '学習タブ：今日のデッキ、連続記録、今週', choices: '学習中の選択問題カード', run: '学習中：答えを表示したカード', waiting: 'カードを作成中：ページを読み取り', end: '学習の終わり', library: 'すべてのデッキが並ぶライブラリ' },
   },
 } as const;
 

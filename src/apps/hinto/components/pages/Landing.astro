@@ -16,7 +16,6 @@ const jsonLd = {
     {
       '@type': 'MobileApplication',
       name: 'Hinto',
-      alternateName: 'おぼえる',
       operatingSystem: `iOS ${site.minimumIOS}+`,
       applicationCategory: 'EducationalApplication',
       description: s.description,
@@ -41,12 +40,12 @@ const jsonLd = {
     <div class="hero-visual">
       <div class="stack">
         <span class="under u1"></span><span class="under u2"></span><span class="under u3"></span>
-        <div class="face" lang="ja">
-          <p class="card-label">{s.cardLabel}</p>
-          <p class="reading">おぼえる</p>
-          <p class="term">覚える</p>
-          <p class="meaning" lang={s.htmlLang}>{s.cardMeaning}</p>
-          <span class="glyph" aria-hidden="true">覚</span>
+        <div class="face" lang={s.card.lang}>
+          <p class="card-label" lang={s.htmlLang}>{s.card.label}</p>
+          <p class="reading">{s.card.reading}</p>
+          <p class={`term ${s.card.lang === 'en' ? 'latin' : ''}`}>{s.card.term}</p>
+          <p class="meaning" lang={s.htmlLang}>{s.card.meaning}</p>
+          <span class="glyph" aria-hidden="true">{s.card.glyph}</span>
         </div>
         <Buddy name="kotaro" size={128} class="on-stack" />
       </div>
@@ -61,7 +60,7 @@ const jsonLd = {
         <p class="lead">{f.body}</p>
       </div>
       <div class="feature-shot">
-        {f.buddy && <Buddy name={f.buddy as 'kai' | 'pochi'} pose="happy" size={88} class={`peek ${i % 2 ? 'right' : 'left'}`} />}
+        {f.buddy && <Buddy name={f.buddy as 'kotaro' | 'kai' | 'pochi'} pose="happy" size={88} class={`peek ${i % 2 ? 'right' : 'left'}`} />}
         <PhoneShot lang={lang} shot={f.shot} alt={s.shotAlt[f.shot as keyof typeof s.shotAlt]} width={280} />
       </div>
     </section>
@@ -118,9 +117,10 @@ const jsonLd = {
   .face { box-shadow: var(--shadow-stack); padding: 22px; overflow: hidden; display: flex; flex-direction: column; animation: float 2s ease-in-out infinite alternate; }
   @keyframes float { to { transform: translateY(-6px); box-shadow: var(--shadow-hover); } }
   .face p { margin: 0; }
-  .card-label { font-size: var(--fs-label); font-weight: 700; color: var(--teal-text); letter-spacing: .04em; }
-  .reading { margin-top: auto !important; text-align: center; font-size: 1.375rem; font-weight: 600; color: var(--teal-text); }
+  .card-label { font-size: var(--fs-label); font-weight: 700; color: var(--accent-text); letter-spacing: .04em; }
+  .reading { margin-top: auto !important; text-align: center; font-size: 1.375rem; font-weight: 600; color: var(--accent-text); }
   .term { text-align: center; font-size: 3.5rem; font-weight: 800; line-height: 1.2; }
+  .term.latin { font-size: 2.25rem; overflow-wrap: normal; }
   .meaning { text-align: center; color: var(--muted); margin-bottom: auto !important; }
   .glyph { position: absolute; right: -10px; bottom: -36px; font-size: 140px; font-weight: 800; color: var(--card-glyph); opacity: .55; line-height: 1; }
   :global(.on-stack) { position: absolute; top: -78px; right: -20px; }
@@ -137,7 +137,7 @@ const jsonLd = {
   .privacy h2 { font-size: var(--fs-h2); font-weight: 800; }
   .points { list-style: none; padding: 0; margin: 28px 0; display: grid; gap: 20px; }
   .points li { display: flex; gap: 14px; align-items: flex-start; }
-  .dot { flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--tonal-bg); color: var(--teal); display: grid; place-items: center; }
+  .dot { flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--tonal-bg); color: var(--accent); display: grid; place-items: center; }
   .more { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; min-height: 44px; }
   :global(.sleeper) { position: absolute; right: 24px; bottom: -28px; }
 

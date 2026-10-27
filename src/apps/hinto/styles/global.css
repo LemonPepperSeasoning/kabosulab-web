@@ -5,19 +5,19 @@
                "Noto Sans CJK JP", "BIZ UDPGothic", Meiryo, system-ui, sans-serif;
 
   --table: #ECE8E1; --table-centre: #F6F3EE; --card: #FFFDF9; --surface-inset: #F3EFE8;
-  --ink: #1F2A2E; --on-ink: #FFFFFF;
+  --ink: #1E1B2E; --on-ink: #FFFFFF;
   --muted: #5B6266;          /* secondary text (the app's muted fails AA for body text on the web) */
   --muted-graphic: #7D8589;
-  --teal: #0F766E; --teal-text: #0B5D57; --tonal-bg: #DCEFEB;
+  --accent: #2D46D6; --accent-text: #2D46D6; --tonal-bg: #E3E8FC;
   --streak: #D9620F; --streak-text: #A84A12; --gold: #F2B84B;
-  --line: rgb(31 42 46 / .08); --chip-border: #CFC9BF; --card-glyph: #D5D0C7; --stack-edge: rgb(0 0 0 / .06);
-  --focus: #0F766E;
+  --line: rgb(30 27 46 / .08); --chip-border: #CFC9BF; --card-glyph: #D5D0C7; --stack-edge: rgb(0 0 0 / .06);
+  --focus: #2D46D6;
   --bg-table: radial-gradient(ellipse 70% 70% at 50% 30%, var(--table-centre) 0%, var(--table) 100%);
 
-  --shadow-stack: 0 14px 36px rgb(31 42 46 / .30);
-  --shadow-hover: 0 20px 36px rgb(31 42 46 / .30);
-  --shadow-card: 0 7px 18px rgb(31 42 46 / .22);
-  --shadow-pill: 0 5px 14px rgb(31 42 46 / .18);
+  --shadow-stack: 0 14px 36px rgb(30 27 46 / .30);
+  --shadow-hover: 0 20px 36px rgb(30 27 46 / .30);
+  --shadow-card: 0 7px 18px rgb(30 27 46 / .22);
+  --shadow-pill: 0 5px 14px rgb(30 27 46 / .18);
 
   --fs-display: clamp(2.25rem, 1.5rem + 3.2vw, 3.75rem);
   --fs-h2: clamp(1.625rem, 1.3rem + 1.4vw, 2.25rem);
@@ -38,17 +38,17 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --table: #191715; --table-centre: #24211E; --card: #2A2622; --surface-inset: #221F1C;
-    --ink: #F3EEE6; --on-ink: #1F2A2E; --muted: #A39D94; --muted-graphic: #A39D94;
-    --teal: #2DD4BF; --teal-text: #2DD4BF; --tonal-bg: #183330;
+    --ink: #F3EEE6; --on-ink: #1E1B2E; --muted: #A39D94; --muted-graphic: #A39D94;
+    --accent: #7B93FF; --accent-text: #7B93FF; --tonal-bg: #1E2550;
     --streak: #FF8A3D; --streak-text: #FFA463; --gold: #F5C25E;
     --line: rgb(255 255 255 / .09); --chip-border: #4A443D; --card-glyph: #4D4740; --stack-edge: rgb(255 255 255 / .07);
-    --focus: #2DD4BF;
+    --focus: #7B93FF;
     --shadow-stack: 0 14px 36px rgb(0 0 0 / .65); --shadow-hover: 0 20px 36px rgb(0 0 0 / .65);
     --shadow-card: 0 7px 18px rgb(0 0 0 / .5); --shadow-pill: 0 5px 14px rgb(0 0 0 / .5);
   }
 }
-@media (prefers-contrast: more) { :root { --ink: #0F1517; --teal: #0B5D57; --streak-text: #8F3E0C; } }
-@media (prefers-contrast: more) and (prefers-color-scheme: dark) { :root { --ink: #FFFFFF; --muted: #C4BEB5; --teal: #5EEAD4; --teal-text: #5EEAD4; } }
+@media (prefers-contrast: more) { :root { --ink: #0E0C17; --accent: #1F33A8; --accent-text: #1F33A8; --streak-text: #8F3E0C; } }
+@media (prefers-contrast: more) and (prefers-color-scheme: dark) { :root { --ink: #FFFFFF; --muted: #C4BEB5; --accent: #A5B4FF; --accent-text: #A5B4FF; } }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; }
 }
@@ -67,7 +67,7 @@ p { text-wrap: pretty; }
 /* Japanese headings break only at punctuation and <wbr> (Safari ignores auto-phrase); anywhere as a last resort. */
 :lang(ja) h1 { word-break: keep-all; }
 :lang(ja) { line-break: strict; word-break: auto-phrase; }
-a { color: var(--teal-text); text-decoration-thickness: 1.5px; text-underline-offset: .2em; }
+a { color: var(--accent-text); text-decoration-thickness: 1.5px; text-underline-offset: .2em; }
 :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 6px; }
 img { max-width: 100%; height: auto; display: block; }
 .icon svg { width: 22px; height: 22px; display: block; }
@@ -75,7 +75,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 .container { max-width: calc(var(--container) + 2 * var(--gutter)); margin: 0 auto; padding: 0 var(--gutter); }
 .section { padding-block: var(--section-y); }
-.label { font-size: var(--fs-label); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--teal-text); margin: 0 0 12px; }
+.label { font-size: var(--fs-label); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--accent-text); margin: 0 0 12px; }
 :lang(ja) .label { text-transform: none; letter-spacing: 0; font-size: .8125rem; }
 .lead { font-size: var(--fs-lead); font-weight: 500; color: var(--muted); }
 .small { font-size: var(--fs-small); color: var(--muted); }

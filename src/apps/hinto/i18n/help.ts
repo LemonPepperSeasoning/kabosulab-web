@@ -111,6 +111,10 @@ export const help: Record<'en' | 'ja', HelpTopic[]> = {
         {
           "q": "I deleted a deck by mistake.",
           "a": "Tap Undo on the message right away. Later, Library → Recently deleted keeps it for 30 days, with its study history."
+        },
+        {
+          "q": "Where do the decks in Discover come from?",
+          "a": "Hinto makes them from free sources, such as the JMdict dictionary, and lists the credits on each deck's page. Get adds one to your Library. When a newer version comes out, the button says Update, and your study history is kept."
         }
       ]
     },
@@ -152,7 +156,7 @@ export const help: Record<'en' | 'ja', HelpTopic[]> = {
         },
         {
           "q": "Does Hinto send anything anywhere?",
-          "a": "Only what you choose: deck files you share, and debug info when you send it. Cards are made on your iPhone."
+          "a": "Only what you choose: deck files you share, and debug info when you send it. Cards are made on your iPhone. Discover only downloads: Hinto's deck list and the decks you get. No account, no tracking."
         }
       ]
     }
@@ -267,6 +271,10 @@ export const help: Record<'en' | 'ja', HelpTopic[]> = {
         {
           "q": "間違えてデッキを削除しました。",
           "a": "表示されたメッセージの「取り消す」をすぐにタップします。あとからでも、ライブラリ → 最近削除した項目に学習履歴ごと30日間残ります。"
+        },
+        {
+          "q": "「見つける」のデッキはどこから来ていますか？",
+          "a": "JMdict辞書などの自由に使える資料からHintoが作っていて、出典は各デッキのページに載せています。「入手」でライブラリに追加できます。新しい版が出るとボタンが「アップデート」になり、学習の記録はそのまま残ります。"
         }
       ]
     },
@@ -308,7 +316,7 @@ export const help: Record<'en' | 'ja', HelpTopic[]> = {
         },
         {
           "q": "Hintoはどこかにデータを送りますか？",
-          "a": "あなたが選んだものだけです。共有したデッキファイルと、送ったときのデバッグ情報だけ。カードはiPhoneの中で作られます。"
+          "a": "あなたが選んだものだけです。共有したデッキファイルと、送ったときのデバッグ情報だけ。カードはiPhoneの中で作られます。「見つける」はダウンロードするだけです。Hintoのデッキの一覧と、入手したデッキだけ。アカウントも追跡もありません。"
         }
       ]
     }
