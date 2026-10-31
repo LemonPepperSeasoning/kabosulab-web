@@ -9,7 +9,7 @@ Live at https://lemonpepperseasoning.github.io/kabosulab-web/ until kabosulab.co
 | `/` | Kabosu Lab: the list of apps |
 | `/hasha/`, `/hasha/support/`, `/hasha/privacy/` | Hasha (English) |
 | `/hinto/`, `/hinto/support/`, `/hinto/privacy/`, and the same under `/hinto/ja/` | Hinto (English and Japanese), ported from Hinto-web |
-| `/epoq/`, `/epoq/support/`, `/epoq/privacy/` | Epoq (English). Icons are a stand-in (concept 09) until the icon is chosen |
+| `/epoq/`, `/epoq/support/`, `/epoq/privacy/` | Epoq (English) |
 
 Hinto 1.0 was submitted with the Hinto-web URLs, so both sites serve Hinto's pages until a Hinto release switches App Store Connect to these. Hinto-web then becomes redirects.
 
@@ -63,7 +63,7 @@ Add it to `langs` in the app's `i18n/site.ts` with the same keys, add it to `hel
 ## Epoq
 
 - The share image `public/epoq/og.png` is rendered from `scripts/epoq/og.html` (the command is in the file).
-- `public/epoq/app-icon.png` and `apple-touch-icon.png` are a stand-in (icon concept 09) until the app icon is decided; replace them from the app's AppIcon, then re-render og.png.
+- `public/epoq/app-icon.png` (256) and `apple-touch-icon.png` (180) are resized from the app's light AppIcon (`sips -z`); re-render og.png after changing them.
 - At launch: `install: 'live'` and `appStoreId` in `src/apps/epoq/config.ts`; if the App Store name changes the Home Screen name, update `name` there.
 
 ## Custom domain (later)
