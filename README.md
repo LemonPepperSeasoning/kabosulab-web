@@ -9,6 +9,7 @@ Live at https://lemonpepperseasoning.github.io/kabosulab-web/ until kabosulab.co
 | `/` | Kabosu Lab: the list of apps |
 | `/hasha/`, `/hasha/support/`, `/hasha/privacy/` | Hasha (English) |
 | `/hinto/`, `/hinto/support/`, `/hinto/privacy/`, and the same under `/hinto/ja/` | Hinto (English and Japanese), ported from Hinto-web |
+| `/epoq/`, `/epoq/support/`, `/epoq/privacy/` | Epoq (English) |
 
 Hinto 1.0 was submitted with the Hinto-web URLs, so both sites serve Hinto's pages until a Hinto release switches App Store Connect to these. Hinto-web then becomes redirects.
 
@@ -58,6 +59,12 @@ Add it to `langs` in the app's `i18n/site.ts` with the same keys, add it to `hel
 - `node scripts/hinto/render-images.mjs` renders the share images (needs Google Chrome).
 - `node scripts/hinto/extract-buddies.mjs <design kit>/ui-design/_kit/characters.js` refreshes the buddies.
 - At launch: `install: 'live'` and `appStoreId` in `src/apps/hinto/config.ts`, and Apple's localised badges in `public/hinto/badges/app-store-{en,ja}.svg`.
+
+## Epoq
+
+- The share image `public/epoq/og.png` is rendered from `scripts/epoq/og.html` (the command is in the file).
+- `public/epoq/app-icon.png` (256) and `apple-touch-icon.png` (180) are resized from the app's light AppIcon (`sips -z`); re-render og.png after changing them.
+- At launch: `install: 'live'` and `appStoreId` in `src/apps/epoq/config.ts`; if the App Store name changes the Home Screen name, update `name` there.
 
 ## Custom domain (later)
 

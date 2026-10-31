@@ -1,0 +1,25 @@
+---
+import { site } from '../config';
+import { t, path, type Lang } from '../i18n/site';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t[lang];
+---
+<header class="container top">
+  <a class="brand" href={path(lang, '')}>
+    <img src={`${import.meta.env.BASE_URL}epoq/app-icon.png`} alt="" width="32" height="32" />
+    <span>{site.name}</span>
+  </a>
+  <nav aria-label={site.name}>
+    <a href={path(lang, 'support/')}>{s.nav.support}</a>
+    <a href={path(lang, 'privacy/')}>{s.nav.privacy}</a>
+  </nav>
+</header>
+<style>
+  .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 72px; }
+  .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); font-weight: 650; font-size: 1.0625rem; text-decoration: none; }
+  .brand img { border-radius: 22%; box-shadow: 0 0 0 1px var(--line); }
+  nav { display: flex; gap: 4px; }
+  nav a { color: var(--muted); text-decoration: none; font-size: var(--fs-small); padding: 10px 12px; min-height: 44px; display: inline-flex; align-items: center; }
+  nav a:hover { color: var(--ink); }
+</style>

@@ -1,0 +1,53 @@
+/* Epoq website: the app's dark theme (Theme.swift): true black, sheet and hairline greys, phosphor green. Dark only. */
+:root {
+  color-scheme: dark;
+  --font-sans: system-ui, -apple-system, "SF Pro Text", "Helvetica Neue", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --bg: #000000; --surface: #0F0F10; --ink: #F2F2EE; --muted: #9B9B96; --line: #232325;
+  --accent: #3DFF7A; --accent-text: #3DFF7A; --on-accent: #001A08; --focus: #3DFF7A;
+
+  --fs-display: clamp(2.25rem, 1.5rem + 3.2vw, 3.75rem);
+  --fs-h2: clamp(1.5rem, 1.25rem + 1.2vw, 2.125rem);
+  --fs-lead: clamp(1.0625rem, 1rem + .4vw, 1.25rem);
+  --fs-body: 1.0625rem; --fs-small: .9375rem;
+  --gutter: 16px; --container: 1040px; --section-y: clamp(56px, 8vw, 96px);
+  --r-m: 14px; --r-l: 22px;
+}
+@media (min-width: 640px) { :root { --gutter: 32px; } }
+@media (prefers-contrast: more) { :root { --ink: #FFFFFF; --muted: #C8C8C3; --line: #3A3A3D; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; }
+}
+
+/* Base */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; overflow-x: clip; background: var(--bg); color: var(--ink);
+  font: var(--fs-body)/1.6 var(--font-sans); -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 { line-height: 1.15; letter-spacing: -.02em; margin: 0; text-wrap: balance; }
+h1 { font-size: var(--fs-display); font-weight: 700; }
+h2 { font-size: var(--fs-h2); font-weight: 650; }
+p, h1, h2, h3, li { overflow-wrap: anywhere; }
+p { margin: 0; text-wrap: pretty; }
+a { color: var(--accent-text); text-underline-offset: .18em; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 6px; }
+img { max-width: 100%; height: auto; display: block; }
+code { font-family: var(--font-mono); font-size: .9em; }
+pre { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-m); padding: 14px 16px;
+      overflow-x: auto; font: .875rem/1.5 var(--font-mono); }
+
+.container { width: 100%; max-width: calc(var(--container) + 2 * var(--gutter)); margin: 0 auto; padding: 0 var(--gutter); }
+.section { padding-block: var(--section-y); }
+.label { color: var(--accent-text); font: 500 .875rem/1 var(--font-mono); letter-spacing: .02em; margin: 0 0 18px; }
+.lead { font-size: var(--fs-lead); color: var(--muted); max-width: 40em; }
+.small { font-size: var(--fs-small); color: var(--muted); }
+.accent { color: var(--accent); }
+.paper { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-l); }
+
+/* Install: a plain "coming soon" pill, or Apple's badge as is. */
+.soon { display: inline-block; padding: 10px 16px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+.badge { display: inline-block; }
+.badge img { height: 53px; width: auto; }

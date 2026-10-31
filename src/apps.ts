@@ -2,6 +2,7 @@
 // src/apps/<slug>/ (laid out like Hinto-web), with page files in src/pages/<slug>/.
 import { site as hasha } from './apps/hasha/config';
 import { site as hinto } from './apps/hinto/config';
+import { site as epoq } from './apps/epoq/config';
 
 export const studio = {
   name: 'Kabosu Lab',
@@ -11,6 +12,7 @@ export const studio = {
 export const apps = [
   { slug: 'hasha', name: hasha.name, tagline: 'Hunt for SHA-256 collisions on your iPhone’s CPU and GPU.' },
   { slug: 'hinto', name: hinto.name, tagline: 'Photograph a page and get flashcards.' },
+  { slug: 'epoq', name: epoq.name, tagline: 'The live Unix timestamp, and your moments in seconds.' },
 ];
 
 /** A path on this site, with the base and a trailing slash. */

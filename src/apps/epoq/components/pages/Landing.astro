@@ -1,0 +1,78 @@
+---
+import Base from '../../layouts/Base.astro';
+import InstallBadge from '../InstallBadge.astro';
+import PhoneShot from '../PhoneShot.astro';
+import { site, appStoreURL } from '../../config';
+import { t, path, type Lang } from '../../i18n/site';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t[lang];
+const origin = Astro.site!.origin;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'MobileApplication',
+  name: site.name,
+  operatingSystem: `iOS ${site.minimumIOS}+`,
+  applicationCategory: 'UtilitiesApplication',
+  description: s.description,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  url: new URL(path(lang, ''), origin).href,
+  ...(appStoreURL() ? { installUrl: appStoreURL() } : {}),
+  publisher: { '@type': 'Organization', name: site.publisher, email: site.email },
+};
+---
+<Base lang={lang} page="" title={s.title} description={s.description} jsonLd={jsonLd}>
+  <section class="container hero">
+    <div>
+      <p class="label">{s.heroLabel}</p>
+      <h1 set:html={s.heroTitle} />
+      <p class="lead">{s.heroLead}</p>
+      <div class="install">
+        <InstallBadge lang={lang} />
+        <p class="small">{s.requires}</p>
+      </div>
+    </div>
+    <div class="shots">
+      <PhoneShot lang={lang} shot="now" alt={s.shotAlt.now} eager />
+      <PhoneShot lang={lang} shot="timeline" alt={s.shotAlt.timeline} eager />
+    </div>
+  </section>
+
+  <section class="container section">
+    <ul class="features">
+      {s.features.map((f) => (
+        <li class="paper">
+          <h2>{f.title}</h2>
+          <p class="small">{f.body}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="container section split">
+    <PhoneShot lang={lang} shot="detail" alt={s.shotAlt.detail} />
+    <div>
+      <h2>{s.privacyTitle}</h2>
+      <p class="lead">{s.privacyLead} <a href={path(lang, 'privacy/')}>{s.nav.privacy}</a></p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero { display: grid; gap: 48px; padding-top: clamp(24px, 6vw, 72px); align-items: center; }
+  @media (min-width: 900px) { .hero { grid-template-columns: 1.1fr 1fr; } }
+  .label { overflow-wrap: anywhere; }
+  .lead { margin-top: 20px; }
+  .install { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; }
+  .shots { display: flex; gap: 20px; justify-content: center; }
+  .shots :global(.phone):nth-child(2) { margin-top: 48px; }
+  .shots :global(img) { width: min(260px, 42vw); }
+  .features { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .features li { padding: 24px; }
+  .features h2 { font-size: 1.1875rem; margin-bottom: 10px; }
+  .features .small { font-size: var(--fs-body); }
+  .split { display: grid; gap: 40px; align-items: center; }
+  .split :global(.phone) { justify-self: center; }
+  .split :global(img) { width: min(260px, 70vw); }
+  @media (min-width: 800px) { .split { grid-template-columns: auto 1fr; gap: 72px; } }
+</style>
