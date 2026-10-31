@@ -1,7 +1,7 @@
 // One place for what changes at release.
 export const site = {
-  /** The Home Screen name. The App Store name is still open (see the notes repo's unixtime/app-store-listing.md). */
-  name: 'Unixtime',
+  /** The Home Screen name. The App Store name is "Epoq: Unix Time Clock" (the notes repo's epoq/app-store-listing.md). */
+  name: 'Epoq',
   publisher: 'Kabosu Lab',
   email: 'lemonpepperstudioco@gmail.com',
   /** 'soon' before launch (a plain text pill, never an imitation badge); 'live' uses Apple's badge. */

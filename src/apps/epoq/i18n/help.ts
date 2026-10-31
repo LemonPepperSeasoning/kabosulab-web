@@ -1,4 +1,4 @@
-// The support FAQ, written from the app as built (Unixtime 1.0). It has no in-app Help to sync from.
+// The support FAQ, written from the app as built (Epoq 1.0). It has no in-app Help to sync from.
 // `code` is shown as a command block under the answer.
 import type { Lang } from './site';
 
@@ -8,12 +8,12 @@ export const help: Record<Lang, HelpItem[]> = {
     {
       q: 'What is Unix time?',
       a: ['The number of seconds since 1 January 1970 at 00:00:00 UTC. It’s the same number everywhere in the world at the same instant, which is why computers use it. It skips leap seconds, so every day is exactly 86,400 seconds.',
-          'You can check the number Unixtime shows against your computer’s clock with the command below (Mac or Linux).'],
+          'You can check the number Epoq shows against your computer’s clock with the command below (Mac or Linux).'],
       code: 'date +%s',
     },
     {
       q: 'How do I save a moment?',
-      a: ['Tap Capture under the clock. Unixtime saves that exact second straight away, as an untitled moment, so nothing is lost while you type. Tap Name it on the message that appears (or on the moment in the timeline) to add a title, an emoji and a note.'],
+      a: ['Tap Capture under the clock. Epoq saves that exact second straight away, as an untitled moment, so nothing is lost while you type. Tap Name it on the message that appears (or on the moment in the timeline) to add a title, an emoji and a note.'],
     },
     {
       q: 'Can I add a date in the past or the future?',
@@ -33,7 +33,7 @@ export const help: Record<Lang, HelpItem[]> = {
     },
     {
       q: 'How does desk mode work?',
-      a: ['Turn your iPhone sideways and Unixtime shows just the number. While it’s sideways the screen stays awake (you can turn this off in Settings). Tap the screen to switch to a red tint for night.'],
+      a: ['Turn your iPhone sideways and Epoq shows just the number. While it’s sideways the screen stays awake (you can turn this off in Settings). Tap the screen to switch to a red tint for night.'],
     },
     {
       q: 'Are my moments backed up or synced?',
@@ -44,7 +44,7 @@ export const help: Record<Lang, HelpItem[]> = {
       a: ['Open it and tap Delete, or touch and hold it in the timeline and choose Delete.'],
     },
     {
-      q: 'Does Unixtime collect any data?',
+      q: 'Does Epoq collect any data?',
       a: ['No. It has no account, no analytics and no network access. See the privacy policy.'],
     },
   ],

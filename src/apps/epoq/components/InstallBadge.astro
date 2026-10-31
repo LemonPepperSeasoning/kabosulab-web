@@ -1,12 +1,12 @@
 ---
 // Before launch: a plain "coming soon" pill (Apple has no coming-soon badge and its badge may not be altered).
-// Live: Apple's official badge from Apple's marketing tools (public/unixtime/badges/), linked to the App Store.
+// Live: Apple's official badge from Apple's marketing tools (public/epoq/badges/), linked to the App Store.
 import { site, appStoreURL } from '../config';
 import { t, type Lang } from '../i18n/site';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const s = t[lang];
-const badge = `${import.meta.env.BASE_URL}unixtime/badges/app-store-${lang}.svg`;
+const badge = `${import.meta.env.BASE_URL}epoq/badges/app-store-${lang}.svg`;
 ---
 {site.install === 'soon' || !site.appStoreId
   ? <p class="soon">{s.soon}</p>
